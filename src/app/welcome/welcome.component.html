@@ -1,0 +1,23 @@
+<div class="container py-5">
+    <h2 class="display-7">Welcome to the Quiz</h2>
+    <p class="fs-4 col-md-8">Quiz contains {{totalQuestions}} questions and all are compulsory.</p>
+    <p class="fs-4 col-md-8">Each question contain 10 points.</p>
+    <br><br>
+    <h2 class="display-7">Tell us about yourself.</h2>
+    <br>
+    <div class="input-group container">
+        <span class="input-group-text">First and last name</span>
+        <!-- going to use viewchild -->
+        <input type="text" #firstname aria-label="First name" id="username" class="form-control"><!-- template refrence variable as #firstname -->
+        <input type="text" #lastname aria-label="Last name" class="form-control"><!-- template refrence variable as #lastname -->
+      </div>
+      <br>
+      <div class="input-group container">
+        <span class="input-group-text">Email Address</span>
+        <input type="email" #email class="form-control" placeholder="exampleshrey@simplilearn.com"><!-- template refrence variable as #email -->
+      </div>
+      <br>
+      <div class="col-12 container">
+        <button class="btn btn-danger " (click)="startQuiz()" routerLink="/question">Start Quiz!!</button>
+      </div>
+</div>

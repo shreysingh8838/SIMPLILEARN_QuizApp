@@ -1,0 +1,72 @@
+<div class="container">
+    <div class="card my-4">
+        <div class="quiz_header d-flex justify-content-between p-3">
+            <div class="image">
+                <img src="https://st2.depositphotos.com/32927174/49738/v/380/depositphotos_497385866-stock-illustration-white-drawing-compass-icon-isolated.jpg?forcejpeg=true" alt="" width="150" height="150" class="d-inline-block align-text-top">
+            </div>
+            <div class="user_data start_quiz">
+                <!-- to fetch any variable value from js to html is {{name}} only; this is called String Interpolation -->
+                <h4>Welcome {{name}}</h4>
+                <br>
+                <button (click)="startCounter()" class="btn btn-danger"> Start Maths Test</button>
+            </div>
+        </div>
+        <ng-container *ngIf = "!isquizcompleted">
+            <div class="question_data d-flex justify-content-around py-3">
+                <div class="score">
+                    <h5>{{points}} Points</h5>
+                </div>
+                <div class="question-remain">
+                    <span>Question {{currentQuestion + 1}} out of {{totalQuestions}}</span>
+                </div>
+                <div class="timer">
+                    <h5> {{counter}} seconds ⏱️</h5>
+                </div>
+            </div>
+            <div class="progress mb-3">
+                <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" [ngStyle] ="{'width':progress+'%'}" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <div class="question">
+                <div class="card">
+                    <h3>{{questionlist[currentQuestion]?.label}}</h3>
+                </div>
+            </div>
+            <div class="options">
+                <ol *ngFor = "let option of questionlist[currentQuestion]?.choices" >
+                <li (click)="answer(currentQuestion+1, option)">
+                    <div class="card">
+                        {{option.value}}
+                    </div>
+                </li>
+            </ol>
+            </div>
+            <div class="navigation_buttons d-flex justify-content-between">
+                <!-- either we can use disabled property of button or we can use the validate the button on previous or next question function only in the .ts file -->
+                <button [disabled]="currentQuestion==0" class="btn" (click)="previousQuestion()"> <i class="fa text-danger fa-chevron-left fa-3x" aria-hidden="true"></i> </button>
+                <button class="btn" (click)="resetQuiz()" >  <i class="fa fa-refresh fa-3x text-danger" aria-hidden="true"></i> </button>
+                <button [disabled]="currentQuestion==totalQuestions-1" class="btn" (click)="nextQuestion()" > <i class="fa text-danger fa-chevron-right fa-3x" aria-hidden="true"></i></button>
+            </div>
+        </ng-container>
+        <ng-container *ngIf = "isquizcompleted">
+            <div class="row d-flex justify-content-between">
+                <img style="width: 50%;" class="img-fluid col-sm-12 mx-auto" src="https://previews.123rf.com/images/aliawartany/aliawartany2008/aliawartany200800025/153750056-accreditation-certificate-written-black-color-with-amazing-purple-gradient-certificate-icon.jpg" alt="">
+                <div class="result text-center col-md-6 col-sm-12 my-5">
+                    <h3 class="mt-4">REPORT :</h3>
+                    <br>
+                    <p> Total questions attempted : {{correctNoOfAnswers + incorrectNoOfAnswers}} </p>
+                    <p> Total correct answers : {{correctNoOfAnswers}} </p>
+                    <p> Total wrong answers : {{incorrectNoOfAnswers}} </p>
+                    <p> Your Score : {{points}} Points </p>
+                </div>
+            </div>
+            <br>
+            <div class="form-floating container">
+                <textarea class="form-control" #usercomment placeholder="Leave a comment here" style="height: 100px"></textarea>
+                <label for="" class="mx-3">Give a Feedback.</label>
+                <br>
+                <button (click)="saveFeedback()" class="btn btn-danger"> Save Feedback</button>
+            </div>
+        </ng-container>
+    </div>
+
+</div>
